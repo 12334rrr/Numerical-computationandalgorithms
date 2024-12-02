@@ -90,83 +90,90 @@ double HDTwoCurve(double **curve_a_control_points, int a_size, double **curve_b_
 }
 
 int main() {
+    FILE *in_file;
+    FILE *out_file;
+
     // 打开输入文件
-    FILE *in_file = fopen("../Code/BigHomeWork/in.txt", "r");
+    in_file = fopen("../Code/BigHomeWork/in.txt", "r");
     if (in_file == NULL) {
         printf("Error opening input file.\n");
         return 1;
-    }
-    else {
+    } else {
         printf("Input file opened successfully.\n");
     }
-    // 读取 Bézier 曲线 A 的控制点数量
-    int a_size;
-    fscanf(in_file, "%d", &a_size);
 
-    // 动态分配 Bézier 曲线 A 的控制点
-    double **curve_a_control_points = (double **) malloc(a_size * sizeof(double *));
-    for (int i = 0; i < a_size; i++) {
-        curve_a_control_points[i] = (double *) malloc(2 * sizeof(double)); // 假设控制点是二维的
-    }
-
-    // 填充 Bézier 曲线 A 的控制点
-    for (int i = 0; i < a_size; i++) {
-        fscanf(in_file, "%lf %lf", &curve_a_control_points[i][0], &curve_a_control_points[i][1]);
-    }
-
-    // 读取 Bézier 曲线 B 的控制点数量
-    int b_size;
-    fscanf(in_file, "%d", &b_size);
-
-    // 动态分配 Bézier 曲线 B 的控制点
-    double **curve_b_control_points = (double **) malloc(b_size * sizeof(double *));
-    for (int i = 0; i < b_size; i++) {
-        curve_b_control_points[i] = (double *) malloc(2 * sizeof(double)); // 假设控制点是二维的
-    }
-
-    // 填充 Bézier 曲线 B 的控制点
-    for (int i = 0; i < b_size; i++) {
-        fscanf(in_file, "%lf %lf", &curve_b_control_points[i][0], &curve_b_control_points[i][1]);
+    // 打开输出文件
+    out_file = fopen("../Code/BigHomeWork/out.txt", "w");
+    if (out_file == NULL) {
+        printf("Error opening output file.\n");
+        return 1;
+    } else {
+        printf("Output file opened successfully.\n");
     }
 
     // 设定离散化的点数
     int num_points = 100;
 
-    // 设定空间的维度（二维）
+    // 设定空间的维度（二维或三维）
     int n = 2;
 
-    // 关闭输入文件
+    // 逐对读取 Bézier 曲线并计算 Hausdorff 距离
+    while (!feof(in_file)) {
+        int a_size, b_size;
+
+        // 读取 Bézier 曲线 A 的控制点数量
+        if (fscanf(in_file, "%d", &a_size) != 1) break;
+
+        // 动态分配 Bézier 曲线 A 的控制点
+        double **curve_a_control_points = (double **)malloc(a_size * sizeof(double *));
+        for (int i = 0; i < a_size; i++) {
+            curve_a_control_points[i] = (double *)malloc(n * sizeof(double)); // 假设控制点是二维或三维的
+        }
+
+        // 填充 Bézier 曲线 A 的控制点
+        for (int i = 0; i < a_size; i++) {
+            for (int j = 0; j < n; j++) {
+                fscanf(in_file, "%lf", &curve_a_control_points[i][j]);
+            }
+        }
+
+        // 读取 Bézier 曲线 B 的控制点数量
+        fscanf(in_file, "%d", &b_size);
+
+        // 动态分配 Bézier 曲线 B 的控制点
+        double **curve_b_control_points = (double **)malloc(b_size * sizeof(double *));
+        for (int i = 0; i < b_size; i++) {
+            curve_b_control_points[i] = (double *)malloc(n * sizeof(double)); // 假设控制点是二维或三维的
+        }
+
+        // 填充 Bézier 曲线 B 的控制点
+        for (int i = 0; i < b_size; i++) {
+            for (int j = 0; j < n; j++) {
+                fscanf(in_file, "%lf", &curve_b_control_points[i][j]);
+            }
+        }
+
+        // 计算 Hausdorff 距离
+        double hd = HDTwoCurve(curve_a_control_points, a_size, curve_b_control_points, b_size, num_points, n);
+
+        // 输出结果到文件
+        fprintf(out_file, "Hausdorff Distance: %lf\n", hd);
+
+        // 释放内存
+        for (int i = 0; i < a_size; i++) {
+            free(curve_a_control_points[i]);
+        }
+        free(curve_a_control_points);
+
+        for (int i = 0; i < b_size; i++) {
+            free(curve_b_control_points[i]);
+        }
+        free(curve_b_control_points);
+    }
+
+    // 关闭文件
     fclose(in_file);
-
-    // 计算 Hausdorff 距离
-    double hd = HDTwoCurve(curve_a_control_points, a_size, curve_b_control_points, b_size, num_points, n);
-
-    // 打开输出文件
-    FILE *out_file = fopen("../Code/BigHomeWork/out.txt", "w");
-    if (out_file == NULL) {
-        printf("Error opening output file.\n");
-        return 1;
-    }
-    else{
-        printf("Output file opened successfully.\n");
-    }
-
-    // 将计算结果写入输出文件
-    fprintf(out_file, "Hausdorff Distance: %lf\n", hd);
-
-    // 关闭输出文件
     fclose(out_file);
-
-    // 释放内存
-    for (int i = 0; i < a_size; i++) {
-        free(curve_a_control_points[i]);
-    }
-    free(curve_a_control_points);
-
-    for (int i = 0; i < b_size; i++) {
-        free(curve_b_control_points[i]);
-    }
-    free(curve_b_control_points);
 
     return 0;
 }

@@ -11,4 +11,4 @@ add_executable(
         第五周/雅可比迭代法求解高阶稀疏矩阵.c
         第四周/高斯消去法求解线性方程.c main.cpp
         第十次作业/基于复化辛卜生公式的变步长求积算法.c
-        BigHomeWork/HausdorffDistance.c BigHomeWork/draw.c)
+        BigHomeWork/HausdorffDistance.c BigHomeWork/draw.c BigHomeWork/draw.c BigHomeWork/draw.c)
