@@ -1,0 +1,1 @@
+E:\Clion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=E:/Clion/bin/ninja/win/x64/ninja.exe -G Ninja -S G:\大三上\数值计算与算法\Code -B G:\大三上\数值计算与算法\Code\cmake-build-debug
