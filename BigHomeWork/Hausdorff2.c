@@ -15,7 +15,45 @@ double euclidean_distance(Point p1, Point p2) {
     return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }
 
-// 计算集合A和集合B之间的Hausdorff距离
+// 计算三点间的夹角，返回单位弧度
+double angle(Point p1, Point p2, Point p3) {
+    double dx1 = p2.x - p1.x;
+    double dy1 = p2.y - p1.y;
+    double dx2 = p3.x - p2.x;
+    double dy2 = p3.y - p2.y;
+
+    double dot_product = dx1 * dx2 + dy1 * dy2;
+    double magnitude1 = sqrt(dx1 * dx1 + dy1 * dy1);
+    double magnitude2 = sqrt(dx2 * dx2 + dy2 * dy2);
+
+    return acos(dot_product / (magnitude1 * magnitude2));
+}
+
+// 计算曲率：通过三点角度变化估算曲率
+double curvature(Point p1, Point p2, Point p3) {
+    return fabs(angle(p1, p2, p3));
+}
+
+// 在曲率较大的地方增加更多采样点
+void adaptive_sampling(Point original[], int *size, Point sampled[], int *new_size) {
+    *new_size = 0;
+    for (int i = 0; i < *size - 2; i++) {
+        // 计算曲率
+        double curv = curvature(original[i], original[i + 1], original[i + 2]);
+
+        // 如果曲率较大，插入更多点
+        sampled[*new_size++] = original[i];
+
+        // 插入额外的点
+        if (curv > 0.5) {
+            sampled[*new_size++] = original[i + 1];
+        }
+    }
+    sampled[*new_size++] = original[*size - 2];
+    sampled[*new_size++] = original[*size - 1];
+}
+
+// 计算两集合A和B之间的Hausdorff距离
 double hausdorff_distance(Point setA[], int sizeA, Point setB[], int sizeB) {
     double max_dist_a_to_b = 0.0;
 
@@ -80,8 +118,14 @@ int main() {
         fscanf(file, "%lf %lf", &setB[i].x, &setB[i].y);
     }
 
+    // 对集合A和集合B进行自适应采样
+    Point sampledA[MAX_POINTS], sampledB[MAX_POINTS];
+    int new_sizeA, new_sizeB;
+    adaptive_sampling(setA, &sizeA, sampledA, &new_sizeA);
+    adaptive_sampling(setB, &sizeB, sampledB, &new_sizeB);
+
     // 计算Hausdorff距离
-    double hd = hausdorff_distance(setA, sizeA, setB, sizeB);
+    double hd = hausdorff_distance(sampledA, new_sizeA, sampledB, new_sizeB);
     printf("Hausdorff Distance: %lf\n", hd);
 
     fclose(file);

@@ -1,1 +1,51 @@
-Hausdorff Distance: 2.000000
+Sample-based Hausdorff Distance: 2.000000
+Curvature-weighted Hausdorff Distance: 2.000000
+Gradient Descent Hausdorff Distance: 2.000000
+Sample-based Hausdorff Distance: 2.000000
+Curvature-weighted Hausdorff Distance: 2.000000
+Gradient Descent Hausdorff Distance: 2.000000
+Sample-based Hausdorff Distance: 2.828427
+Curvature-weighted Hausdorff Distance: 2.828427
+Gradient Descent Hausdorff Distance: 2.828427
+Sample-based Hausdorff Distance: 4.472136
+Curvature-weighted Hausdorff Distance: 4.472136
+Gradient Descent Hausdorff Distance: 4.472136
+Sample-based Hausdorff Distance: 8.485281
+Curvature-weighted Hausdorff Distance: 8.485281
+Gradient Descent Hausdorff Distance: 8.485281
+Sample-based Hausdorff Distance: 0.000000
+Curvature-weighted Hausdorff Distance: 0.000000
+Gradient Descent Hausdorff Distance: 0.000000
+Sample-based Hausdorff Distance: 2.828427
+Curvature-weighted Hausdorff Distance: 2.828427
+Gradient Descent Hausdorff Distance: 2.828427
+Sample-based Hausdorff Distance: 8.000000
+Curvature-weighted Hausdorff Distance: 8.000000
+Gradient Descent Hausdorff Distance: 8.000000
+Sample-based Hausdorff Distance: 11.180340
+Curvature-weighted Hausdorff Distance: 11.180340
+Gradient Descent Hausdorff Distance: 11.180340
+Sample-based Hausdorff Distance: 9.219544
+Curvature-weighted Hausdorff Distance: 9.219544
+Gradient Descent Hausdorff Distance: 9.219544
+Sample-based Hausdorff Distance: 3.162278
+Curvature-weighted Hausdorff Distance: 3.162278
+Gradient Descent Hausdorff Distance: 3.162278
+Sample-based Hausdorff Distance: 16.124515
+Curvature-weighted Hausdorff Distance: 16.124515
+Gradient Descent Hausdorff Distance: 16.124515
+Sample-based Hausdorff Distance: 2.828427
+Curvature-weighted Hausdorff Distance: 2.828427
+Gradient Descent Hausdorff Distance: 2.828427
+Sample-based Hausdorff Distance: 2.000000
+Curvature-weighted Hausdorff Distance: 2.000000
+Gradient Descent Hausdorff Distance: 2.000000
+Sample-based Hausdorff Distance: 8.485281
+Curvature-weighted Hausdorff Distance: 8.485281
+Gradient Descent Hausdorff Distance: 8.485281
+Sample-based Hausdorff Distance: 0.000000
+Curvature-weighted Hausdorff Distance: 0.000000
+Gradient Descent Hausdorff Distance: 0.000000
+Sample-based Hausdorff Distance: 0.000000
+Curvature-weighted Hausdorff Distance: 0.000000
+Gradient Descent Hausdorff Distance: 0.000000

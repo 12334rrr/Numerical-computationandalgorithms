@@ -22,14 +22,19 @@ def bezier_curve(control_points, num_points=100):
 
 
 # 贝塞尔曲线 A 的控制点
-
-# 从文件中读取控制点
-def read_control_points(filename):
-    return np.loadtxt(filename)
-
-# 读取贝塞尔曲线 A 和 B 的控制点
-control_points_a = read_control_points("BigHomeWork/random_set1.txt")
-control_points_b = read_control_points("BigHomeWork/random_set2.txt")
+control_points_a = np.array([
+    [0, 0], [0.2, 0.4], [0.4, 0.8], [0.6, 1.2], [0.8, 1.5], [1, 1.7],
+    [1.2, 1.9], [1.4, 2.1], [1.6, 2.2], [1.8, 2.3], [2, 2.3], [2.2, 2.3],
+    [2.4, 2.2], [2.6, 2.1], [2.8, 1.9], [3, 1.7], [3.2, 1.5], [3.4, 1.2],
+    [3.6, 0.8], [4, 0]
+])
+# 贝塞尔曲线 B 的控制点，定义为 20 个点
+control_points_b = np.array([
+    [0, 0], [0.1, 0.2], [0.3, 0.5], [0.5, 0.8], [0.7, 1.0], [1.0, 1.2],
+    [1.3, 1.3], [1.5, 1.4], [1.7, 1.4], [1.9, 1.3], [2.1, 1.2], [2.3, 1.0],
+    [2.5, 0.9], [2.7, 0.7], [2.9, 0.5], [3.1, 0.3], [3.3, 0.1], [3.5, -0.1],
+    [3.7, -0.3], [4, 0]
+])
 
 # 计算贝塞尔曲线上的点
 curve_a = bezier_curve(control_points_a)
